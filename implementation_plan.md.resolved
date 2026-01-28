@@ -1,0 +1,269 @@
+# Plano de Implementação - Datathon Passos Mágicos
+
+## Visão Geral
+
+Desenvolver um modelo preditivo de **risco de defasagem escolar** para estudantes da Associação Passos Mágicos, aplicando práticas de MLOps desde o treinamento até o monitoramento em produção.
+
+> [!IMPORTANT]
+> O dataset deve ser obtido do link fornecido no PDF do Datathon. Antes de iniciar, é necessário baixar os dados e o dicionário de dados.
+
+---
+
+## Estrutura Proposta do Projeto
+
+```
+datathon/
+├── data/
+│   ├── raw/                    # Dados brutos
+│   └── processed/              # Dados processados
+├── src/
+│   ├── __init__.py
+│   ├── preprocessing.py        # Pré-processamento
+│   ├── feature_engineering.py  # Engenharia de features
+│   ├── training.py             # Treinamento do modelo
+│   ├── evaluation.py           # Avaliação e métricas
+│   └── utils.py                # Utilitários
+├── api/
+│   ├── __init__.py
+│   ├── main.py                 # FastAPI app
+│   ├── schemas.py              # Pydantic models
+│   └── routers/
+│       └── predict.py          # Endpoint /predict
+├── models/
+│   └── model.joblib            # Modelo serializado
+├── tests/
+│   ├── __init__.py
+│   ├── test_preprocessing.py
+│   ├── test_feature_engineering.py
+│   ├── test_training.py
+│   ├── test_api.py
+│   └── conftest.py             # Fixtures pytest
+├── notebooks/
+│   └── eda.ipynb               # Análise exploratória
+├── monitoring/
+│   ├── drift_detection.py      # Detecção de drift
+│   └── dashboard.py            # Dashboard Streamlit
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── README.md
+├── .env.example
+└── .gitignore
+```
+
+---
+
+## Etapas de Implementação
+
+### Fase 1: Setup Inicial e Dados
+
+#### [NEW] [requirements.txt](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/requirements.txt)
+- Python 3.10+
+- pandas, numpy, scikit-learn
+- fastapi, uvicorn
+- joblib, pytest, pytest-cov
+- evidently (drift detection)
+- streamlit (dashboard)
+
+#### [NEW] [.gitignore](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/.gitignore)
+- Ignorar `data/raw/`, `__pycache__`, `.env`, modelos grandes
+
+#### Dados
+- Baixar dataset do link fornecido no PDF
+- Colocar em `data/raw/`
+- Analisar dicionário de dados
+
+---
+
+### Fase 2: Pipeline de Dados
+
+#### [NEW] [src/preprocessing.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/src/preprocessing.py)
+- Tratamento de valores missing
+- Encoding de variáveis categóricas
+- Normalização/padronização
+- Split treino/validação/teste
+
+#### [NEW] [src/feature_engineering.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/src/feature_engineering.py)
+- Criar features relevantes baseadas no dicionário de dados
+- Features temporais (evolução entre anos)
+- Agregações e indicadores de desempenho
+
+---
+
+### Fase 3: Modelo de Machine Learning
+
+#### [NEW] [src/training.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/src/training.py)
+- Pipeline de treinamento com scikit-learn
+- Experimentação com múltiplos modelos:
+  - Random Forest
+  - Gradient Boosting (XGBoost/LightGBM)
+  - Logistic Regression (baseline)
+- Cross-validation para seleção
+
+#### [NEW] [src/evaluation.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/src/evaluation.py)
+- Métricas: **F1-Score**, Precision, Recall, AUC-ROC
+- Justificativa: F1-Score balanceia precision/recall em problemas desbalanceados
+- Matriz de confusão e análise de erros
+
+#### Serialização
+- Salvar modelo em `models/model.joblib`
+- Salvar preprocessor para garantir consistência
+
+---
+
+### Fase 4: API com FastAPI
+
+#### [NEW] [api/main.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/api/main.py)
+```python
+# Endpoints:
+# GET  /           - Health check
+# POST /predict    - Previsão de risco
+# GET  /metrics    - Métricas Prometheus
+```
+
+#### [NEW] [api/schemas.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/api/schemas.py)
+- Pydantic models para request/response
+- Validação de entrada
+
+---
+
+### Fase 5: Testes (80% Cobertura)
+
+#### [NEW] [tests/test_preprocessing.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/tests/test_preprocessing.py)
+- Testar tratamento de missing values
+- Testar encoding
+
+#### [NEW] [tests/test_feature_engineering.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/tests/test_feature_engineering.py)
+- Testar criação de features
+- Testar edge cases
+
+#### [NEW] [tests/test_training.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/tests/test_training.py)
+- Testar pipeline de treinamento
+- Testar serialização/deserialização
+
+#### [NEW] [tests/test_api.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/tests/test_api.py)
+- Testar endpoints com TestClient FastAPI
+- Testar validação de entrada
+- Testar respostas
+
+---
+
+### Fase 6: Docker
+
+#### [NEW] [Dockerfile](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/Dockerfile)
+```dockerfile
+FROM python:3.10-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+#### [NEW] [docker-compose.yml](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/docker-compose.yml)
+- Serviço API
+- Serviço Dashboard (opcional)
+
+---
+
+### Fase 7: Monitoramento
+
+#### [NEW] [monitoring/drift_detection.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/monitoring/drift_detection.py)
+- Usar biblioteca **Evidently** para detectar drift
+- Comparar distribuições de features
+- Alertas quando drift detectado
+
+#### [NEW] [monitoring/dashboard.py](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/monitoring/dashboard.py)
+- Dashboard Streamlit com:
+  - Métricas do modelo
+  - Visualização de drift
+  - Logs de predições
+
+---
+
+### Fase 8: Documentação
+
+#### [NEW] [README.md](file:///f:/Documentos/FIAP/MLENGINEERING/5.%20Fase%205/datathon/README.md)
+- Visão geral do projeto
+- Instruções de instalação
+- Como rodar (local e Docker)
+- Exemplos de chamadas à API
+- Arquitetura do projeto
+
+---
+
+## Plano de Verificação
+
+### Testes Automatizados
+
+```bash
+# Rodar todos os testes com cobertura
+pytest tests/ --cov=src --cov=api --cov-report=html --cov-fail-under=80
+```
+
+### Testes da API
+
+```bash
+# Iniciar servidor
+uvicorn api.main:app --reload
+
+# Testar health check
+curl http://localhost:8000/
+
+# Testar predição (exemplo)
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"feature1": value1, "feature2": value2, ...}'
+```
+
+### Build Docker
+
+```bash
+# Build da imagem
+docker build -t datathon-passos-magicos .
+
+# Rodar container
+docker run -p 8000:8000 datathon-passos-magicos
+
+# Testar API no container
+curl http://localhost:8000/
+```
+
+### Verificação Manual
+- Testar diferentes inputs na API
+- Verificar métricas no dashboard de drift
+- Validar logs de monitoramento
+
+---
+
+## Cronograma Sugerido
+
+| Fase | Descrição | Duração Estimada |
+|------|-----------|------------------|
+| 1 | Setup e Dados | 1 dia |
+| 2 | Pipeline de Dados | 2 dias |
+| 3 | Modelo ML | 2 dias |
+| 4 | API FastAPI | 1 dia |
+| 5 | Testes | 1 dia |
+| 6 | Docker | 0.5 dia |
+| 7 | Monitoramento | 1 dia |
+| 8 | Documentação | 0.5 dia |
+| 9 | Vídeo | 0.5 dia |
+
+**Total estimado: ~10 dias**
+
+---
+
+## Decisões Pendentes
+
+> [!NOTE]
+> Preciso da sua confirmação sobre os seguintes pontos:
+
+1. **Dataset**: Você já tem acesso ao dataset do Passos Mágicos? Se não, precisa baixar do link fornecido no PDF.
+
+2. **Deploy**: Prefere deploy local ou em nuvem (Heroku, Render, GCP)?
+
+3. **Modelo**: Alguma preferência de algoritmo ou quer que eu experimente vários?
+
+4. **Dashboard**: Streamlit para monitoramento está ok?

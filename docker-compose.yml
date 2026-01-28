@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=false
+      - MODEL_PATH=/app/models/model.joblib
+    volumes:
+      - ./models:/app/models:ro
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      - MODEL_PATH=/app/models/model.joblib
+    volumes:
+      - ./models:/app/models:ro
+      - ./data:/app/data:ro
+    command: ["streamlit", "run", "monitoring/dashboard.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    restart: unless-stopped
+    depends_on:
+      - api
