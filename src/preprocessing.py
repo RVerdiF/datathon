@@ -94,6 +94,10 @@ class DataPreprocessor:
             'Avaliador1', 'Avaliador2', 'Avaliador3', 'Avaliador4',  # Names
             'Rec Av1', 'Rec Av2', 'Rec Av3', 'Rec Av4', 'Rec Psicologia',  # Text recommendations
             'Cg', 'Cf', 'Ct',  # Rankings (derived from target)
+            'IAN',  # Data leakage: -0.98 corr with target (directly encodes defasagem)
+            'Fase ideal',  # Data leakage: directly derived from Defas
+            'Idade 22', 'Ano nasc',  # Data leakage: Fase ideal = f(Idade), so Idade+Fase => Defas
+            'INDE 22',  # Data leakage: composite index containing IAN as component
         ]
         
         # Keep only columns that exist

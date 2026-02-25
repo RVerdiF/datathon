@@ -1,0 +1,50 @@
+# Datathon - Passos Mágicos MLOps Project
+
+## Objetivo
+Desenvolver modelo preditivo para estimar risco de defasagem escolar de estudantes, com pipeline completa de MLOps.
+
+---
+
+## Tarefas
+
+### 1. Planejamento
+- [x] Análise dos requisitos do Datathon
+- [x] Criação do plano de implementação
+- [x] Aprovação do usuário
+
+### 2. Estrutura do Projeto
+- [x] Criar estrutura de diretórios
+- [x] Configurar ambiente (requirements.txt)
+- [x] Configurar Docker
+
+### 3. Pipeline de Dados
+- [x] Análise exploratória dos dados
+- [x] Pré-processamento
+- [x] Feature Engineering
+
+### 4. Modelo de Machine Learning
+- [ ] Treinamento do modelo
+- [ ] Validação e métricas
+- [ ] Serialização (pickle/joblib)
+
+### 5. API
+- [ ] Criar API com FastAPI
+- [ ] Endpoint /predict
+- [ ] Testes da API
+
+### 6. Testes
+- [ ] Testes unitários (80% cobertura)
+- [ ] Testes de integração
+
+### 7. Monitoramento
+- [ ] Configurar logging
+- [ ] Dashboard de drift
+
+### 8. Documentação
+- [ ] README.md completo
+- [ ] Exemplos de uso da API
+- [ ] Instruções de deploy
+
+### 9. Entrega Final
+- [ ] Deploy (local ou cloud)
+- [ ] Vídeo de apresentação
