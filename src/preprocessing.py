@@ -5,11 +5,14 @@ Handles data loading, cleaning, and transformation.
 
 import pandas as pd
 import numpy as np
+import logging
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from typing import Tuple, Dict, Any
 import joblib
 from pathlib import Path
+
+logger = logging.getLogger("passos_magicos")
 
 
 class DataPreprocessor:
@@ -226,11 +229,11 @@ def preprocess_data(
     # Save preprocessor
     preprocessor.save(preprocessor_path)
     
-    print(f"Train set: {len(train_df)} samples")
-    print(f"Validation set: {len(val_df)} samples")
-    print(f"Test set: {len(test_df)} samples")
-    print(f"Features: {len(preprocessor.feature_columns)}")
-    print(f"Preprocessor saved to: {preprocessor_path}")
+    logger.info(f"Train set: {len(train_df)} samples")
+    logger.info(f"Validation set: {len(val_df)} samples")
+    logger.info(f"Test set: {len(test_df)} samples")
+    logger.info(f"Features: {len(preprocessor.feature_columns)}")
+    logger.info(f"Preprocessor saved to: {preprocessor_path}")
     
     return train_df, val_df, test_df
 

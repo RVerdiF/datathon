@@ -69,25 +69,25 @@ class ModelEvaluator:
         if y_proba is not None:
             metrics["roc_auc"] = float(roc_auc_score(y, y_proba))
 
-        # Print summary
-        self._print_summary(metrics)
+        # Log summary
+        self._log_summary(metrics)
 
         return metrics
 
-    def _print_summary(self, metrics: Dict[str, Any]):
-        """Print a formatted summary of metrics."""
-        print(f"  Accuracy:  {metrics['accuracy']:.4f}")
-        print(f"  Precision: {metrics['precision']:.4f}")
-        print(f"  Recall:    {metrics['recall']:.4f}")
-        print(f"  F1-Score:  {metrics['f1_score']:.4f}")
+    def _log_summary(self, metrics: Dict[str, Any]):
+        """Log a formatted summary of metrics."""
+        logger.info(f"  Accuracy:  {metrics['accuracy']:.4f}")
+        logger.info(f"  Precision: {metrics['precision']:.4f}")
+        logger.info(f"  Recall:    {metrics['recall']:.4f}")
+        logger.info(f"  F1-Score:  {metrics['f1_score']:.4f}")
         if "roc_auc" in metrics:
-            print(f"  ROC-AUC:   {metrics['roc_auc']:.4f}")
+            logger.info(f"  ROC-AUC:   {metrics['roc_auc']:.4f}")
 
         cm = np.array(metrics["confusion_matrix"])
-        print(f"\n  Confusion Matrix:")
-        print(f"  {'':>15} Pred:Sem  Pred:Risco")
-        print(f"  {'Real:Sem':>15}  {cm[0][0]:>6}  {cm[0][1]:>6}")
-        print(f"  {'Real:Risco':>15}  {cm[1][0]:>6}  {cm[1][1]:>6}")
+        logger.info("  Confusion Matrix:")
+        logger.info(f"  {'':>15} Pred:Sem  Pred:Risco")
+        logger.info(f"  {'Real:Sem':>15}  {cm[0][0]:>6}  {cm[0][1]:>6}")
+        logger.info(f"  {'Real:Risco':>15}  {cm[1][0]:>6}  {cm[1][1]:>6}")
 
     def get_feature_importance(
         self, model: Any, feature_names: list
@@ -127,11 +127,11 @@ class ModelEvaluator:
         if importance_df.empty:
             return
 
-        print(f"\nTop {top_n} Feature Importances:")
-        print("-" * 40)
+        logger.info(f"Top {top_n} Feature Importances:")
+        logger.info("-" * 40)
         for _, row in importance_df.head(top_n).iterrows():
             bar = "█" * int(row["importance"] * 50)
-            print(f"  {row['feature']:>25}: {row['importance']:.4f} {bar}")
+            logger.info(f"  {row['feature']:>25}: {row['importance']:.4f} {bar}")
 
     def save_report(
         self,
@@ -147,7 +147,7 @@ class ModelEvaluator:
         with open(filepath, "w") as f:
             json.dump(report, f, indent=2)
 
-        print(f"Report saved to: {filepath}")
+        logger.info(f"Report saved to: {filepath}")
 
 
 def evaluate_model(

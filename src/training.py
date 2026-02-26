@@ -123,18 +123,18 @@ class ModelTrainer:
         self, X_train: pd.DataFrame, y_train: pd.Series, cv: int = 5
     ) -> Dict[str, Dict[str, float]]:
         """Train and cross-validate all available models."""
-        print("=" * 60)
-        print("Training and Cross-Validating Models")
-        print("=" * 60)
+        logger.info("=" * 60)
+        logger.info("Training and Cross-Validating Models")
+        logger.info("=" * 60)
 
         for name in self.MODEL_REGISTRY:
-            print(f"\n--- {name} ---")
+            logger.info(f"--- {name} ---")
 
             # Cross-validation
             cv_results = self.cross_validate(name, X_train, y_train, cv=cv)
-            print(f"  CV F1-Score:  {cv_results['f1_mean']:.4f} ± {cv_results['f1_std']:.4f}")
-            print(f"  CV Accuracy:  {cv_results['accuracy_mean']:.4f} ± {cv_results['accuracy_std']:.4f}")
-            print(f"  CV ROC-AUC:   {cv_results['roc_auc_mean']:.4f} ± {cv_results['roc_auc_std']:.4f}")
+            logger.info(f"  CV F1-Score:  {cv_results['f1_mean']:.4f} ± {cv_results['f1_std']:.4f}")
+            logger.info(f"  CV Accuracy:  {cv_results['accuracy_mean']:.4f} ± {cv_results['accuracy_std']:.4f}")
+            logger.info(f"  CV ROC-AUC:   {cv_results['roc_auc_mean']:.4f} ± {cv_results['roc_auc_std']:.4f}")
 
             # Train on full training set
             self.train_model(name, X_train, y_train)
@@ -150,10 +150,10 @@ class ModelTrainer:
         self.best_model_name = best_name
         self.best_model = self.trained_models[best_name]
 
-        print(f"\n{'=' * 60}")
-        print(f"Best model: {best_name}")
-        print(f"  {metric}: {self.cv_results[best_name][metric]:.4f}")
-        print(f"{'=' * 60}")
+        logger.info("=" * 60)
+        logger.info(f"Best model: {best_name}")
+        logger.info(f"  {metric}: {self.cv_results[best_name][metric]:.4f}")
+        logger.info("=" * 60)
 
         return best_name
 
@@ -168,17 +168,17 @@ class ModelTrainer:
         if self.best_model is None:
             raise ValueError("No best model selected. Run select_best_model first.")
 
-        print(f"\nEvaluating best model: {self.best_model_name}")
-        print("-" * 40)
+        logger.info(f"Evaluating best model: {self.best_model_name}")
+        logger.info("-" * 40)
 
         # Validation set
-        print("\n[Validation Set]")
+        logger.info("[Validation Set]")
         val_metrics = self.evaluator.evaluate(
             self.best_model, X_val, y_val, dataset_name="validation"
         )
 
         # Test set
-        print("\n[Test Set]")
+        logger.info("[Test Set]")
         test_metrics = self.evaluator.evaluate(
             self.best_model, X_test, y_test, dataset_name="test"
         )
@@ -197,7 +197,7 @@ class ModelTrainer:
 
         Path(filepath).parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(self.best_model, filepath)
-        print(f"Model saved to: {filepath}")
+        logger.info(f"Model saved to: {filepath}")
 
     @staticmethod
     def load_model(filepath: str = "models/model.joblib"):
@@ -243,7 +243,7 @@ def train_pipeline(
     # Save model and metrics
     trainer.save_model(model_path)
     save_metrics(results, metrics_path)
-    print(f"Metrics saved to: {metrics_path}")
+    logger.info(f"Metrics saved to: {metrics_path}")
 
     return results
 

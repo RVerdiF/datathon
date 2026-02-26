@@ -5,7 +5,10 @@ Creates additional features to improve model performance.
 
 import pandas as pd
 import numpy as np
+import logging
 from typing import List, Optional
+
+logger = logging.getLogger("passos_magicos")
 
 
 class FeatureEngineer:
@@ -154,9 +157,9 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     engineer = FeatureEngineer()
     df_engineered = engineer.create_all_features(df)
     
-    print(f"Created {len(engineer.created_features)} new features:")
+    logger.info(f"Created {len(engineer.created_features)} new features:")
     for feat in engineer.created_features:
-        print(f"  - {feat}")
+        logger.info(f"  - {feat}")
     
     return df_engineered
 
@@ -168,5 +171,5 @@ if __name__ == '__main__':
     df = pd.read_excel('data/raw/dados.xlsx')
     df_engineered = engineer_features(df)
     
-    print(f"\nOriginal shape: {df.shape}")
-    print(f"Engineered shape: {df_engineered.shape}")
+    logger.info(f"Original shape: {df.shape}")
+    logger.info(f"Engineered shape: {df_engineered.shape}")
