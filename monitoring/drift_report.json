@@ -1,0 +1,180 @@
+{
+  "timestamp": "2026-03-02T17:50:21.270277",
+  "n_reference": 602,
+  "n_current": 172,
+  "threshold": 0.3,
+  "features": {
+    "Fase": {
+      "drift_score": 0.0119,
+      "is_drifted": false,
+      "ref_mean": 0.0339,
+      "cur_mean": -0.013,
+      "ref_std": 1.0114,
+      "cur_std": 0.9995
+    },
+    "Gênero": {
+      "drift_score": 0.0014,
+      "is_drifted": false,
+      "ref_mean": 0.003,
+      "cur_mean": 0.0047,
+      "ref_std": 1.001,
+      "cur_std": 1.0032
+    },
+    "Ano ingresso": {
+      "drift_score": 0.0188,
+      "is_drifted": false,
+      "ref_mean": -0.0138,
+      "cur_mean": 0.0702,
+      "ref_std": 0.9974,
+      "cur_std": 0.9881
+    },
+    "Instituição de ensino": {
+      "drift_score": 0.0919,
+      "is_drifted": false,
+      "ref_mean": 0.0409,
+      "cur_mean": -0.1012,
+      "ref_std": 1.0541,
+      "cur_std": 0.8495
+    },
+    "Pedra 20": {
+      "drift_score": 0.0242,
+      "is_drifted": false,
+      "ref_mean": -0.011,
+      "cur_mean": -0.0652,
+      "ref_std": 0.9808,
+      "cur_std": 0.9448
+    },
+    "Pedra 21": {
+      "drift_score": 0.0768,
+      "is_drifted": false,
+      "ref_mean": 0.0239,
+      "cur_mean": -0.0963,
+      "ref_std": 1.0279,
+      "cur_std": 0.8985
+    },
+    "Pedra 22": {
+      "drift_score": 0.0075,
+      "is_drifted": false,
+      "ref_mean": 0.0047,
+      "cur_mean": 0.0165,
+      "ref_std": 1.006,
+      "cur_std": 1.0172
+    },
+    "Nº Av": {
+      "drift_score": 0.0332,
+      "is_drifted": false,
+      "ref_mean": 0.0452,
+      "cur_mean": -0.048,
+      "ref_std": 0.992,
+      "cur_std": 1.0205
+    },
+    "IAA": {
+      "drift_score": 0.0699,
+      "is_drifted": false,
+      "ref_mean": 0.0273,
+      "cur_mean": -0.0279,
+      "ref_std": 0.9193,
+      "cur_std": 1.0642
+    },
+    "IEG": {
+      "drift_score": 0.0188,
+      "is_drifted": false,
+      "ref_mean": 0.0134,
+      "cur_mean": -0.0809,
+      "ref_std": 0.9974,
+      "cur_std": 0.9737
+    },
+    "IPS": {
+      "drift_score": 0.0303,
+      "is_drifted": false,
+      "ref_mean": -0.0138,
+      "cur_mean": 0.0274,
+      "ref_std": 1.0273,
+      "cur_std": 0.9586
+    },
+    "IDA": {
+      "drift_score": 0.029,
+      "is_drifted": false,
+      "ref_mean": 0.0032,
+      "cur_mean": -0.025,
+      "ref_std": 1.0051,
+      "cur_std": 0.9409
+    },
+    "Matem": {
+      "drift_score": 0.0314,
+      "is_drifted": false,
+      "ref_mean": 0.0021,
+      "cur_mean": 0.0208,
+      "ref_std": 0.9988,
+      "cur_std": 0.9271
+    },
+    "Portug": {
+      "drift_score": 0.0205,
+      "is_drifted": false,
+      "ref_mean": -0.0018,
+      "cur_mean": -0.0461,
+      "ref_std": 1.0103,
+      "cur_std": 0.9725
+    },
+    "Inglês": {
+      "drift_score": 0.0214,
+      "is_drifted": false,
+      "ref_mean": 0.0227,
+      "cur_mean": -0.0542,
+      "ref_std": 1.0204,
+      "cur_std": 0.986
+    },
+    "Indicado": {
+      "drift_score": 0.0534,
+      "is_drifted": false,
+      "ref_mean": -0.0018,
+      "cur_mean": 0.0903,
+      "ref_std": 0.9991,
+      "cur_std": 1.0827
+    },
+    "Atingiu PV": {
+      "drift_score": 0.0131,
+      "is_drifted": false,
+      "ref_mean": 0.0044,
+      "cur_mean": 0.0241,
+      "ref_std": 1.0056,
+      "cur_std": 1.0287
+    },
+    "IPV": {
+      "drift_score": 0.0219,
+      "is_drifted": false,
+      "ref_mean": 0.0047,
+      "cur_mean": -0.0324,
+      "ref_std": 0.9935,
+      "cur_std": 1.0399
+    },
+    "Destaque IEG": {
+      "drift_score": 0.0316,
+      "is_drifted": false,
+      "ref_mean": -0.0074,
+      "cur_mean": 0.0668,
+      "ref_std": 0.9981,
+      "cur_std": 1.0248
+    },
+    "Destaque IDA": {
+      "drift_score": 0.001,
+      "is_drifted": false,
+      "ref_mean": 0.0085,
+      "cur_mean": 0.0104,
+      "ref_std": 0.9966,
+      "cur_std": 0.9977
+    },
+    "Destaque IPV": {
+      "drift_score": 0.0209,
+      "is_drifted": false,
+      "ref_mean": 0.003,
+      "cur_mean": 0.0633,
+      "ref_std": 1.0005,
+      "cur_std": 0.993
+    }
+  },
+  "drifted_features": [],
+  "drift_detected": false,
+  "n_drifted": 0,
+  "n_total_features": 21
+}
