@@ -71,11 +71,6 @@ data/raw/*
 data/processed/*
 !data/processed/.gitkeep
 
-# Models (large files)
-models/*.joblib
-models/*.pkl
-!models/.gitkeep
-
 # Logs
 logs/
 *.log
