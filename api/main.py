@@ -72,9 +72,9 @@ app.add_middleware(
 app.include_router(predict.router)
 
 
-@app.get("/", response_model=HealthResponse)
+@app.api_route("/", methods=["GET", "HEAD"], response_model=HealthResponse)
 async def root():
-    """Health check endpoint."""
+    """Health check endpoint. Supports GET and HEAD (for UptimeRobot)."""
     return HealthResponse(
         status="healthy",
         model_loaded=app.state.model_loaded,
