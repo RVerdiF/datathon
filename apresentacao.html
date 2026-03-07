@@ -347,40 +347,144 @@
     <!-- Slide 3: Arquitetura MLOps -->
     <div class="slide-container">
         <h2>2. Arquitetura MLOps de Ponta a Ponta</h2>
-        <div class="content-body">
-            <p style="margin-bottom: 24px;">Um pipeline totalmente modular que liga dados brutos a insights acionáveis.
-            </p>
-            <div class="grid-4">
-                <div class="arch-box">
-                    <i class="fa-solid fa-database"></i>
-                    <h4>Dados & Features</h4>
-                    <p><span class="inline-code">src/preprocessing.py</span> e <span
-                            class="inline-code">feature_engineering.py</span> limpam e transformam os dados base.</p>
+        <div class="content-body" style="justify-content:flex-start; gap:16px; padding-top:4px;">
+
+            <!-- Pipeline principal -->
+            <div style="display:flex; align-items:stretch; gap:0; flex:1;">
+
+                <!-- Etapa 1: Dados -->
+                <div
+                    style="flex:1; background:linear-gradient(160deg,#f0fdf4,#dcfce7); border:1px solid #bbf7d0; border-radius:10px 0 0 10px; padding:20px 14px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;">
+                    <i class="fa-solid fa-table" style="font-size:32px; color:#16a34a;"></i>
+                    <span style="font-size:13px; font-weight:700; color:#15803d;">1. Dados</span>
+                    <span style="font-size:11px; color:#166534; line-height:1.5;">Dataset histórico<br>2022 –
+                        2024<br>indicadores educacionais</span>
+                    <code
+                        style="font-size:9px; color:#16a34a; background:#bbf7d0; padding:3px 7px; border-radius:4px; margin-top:auto;">PEDE_*.xlsx</code>
                 </div>
-                <div class="arch-box">
-                    <i class="fa-solid fa-microchip"></i>
-                    <h4>Treinamento & Serialização</h4>
-                    <p>Modelo validado de classificação treinado e exportado via formato <span
-                            class="inline-code">joblib</span>.</p>
+
+                <!-- Seta -->
+                <div
+                    style="display:flex; align-items:center; padding:0 3px; background:#fff; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
+                    <i class="fa-solid fa-chevron-right" style="font-size:16px; color:#cbd5e1;"></i>
                 </div>
-                <div class="arch-box">
-                    <i class="fa-solid fa-server"></i>
-                    <h4>Serviço & API</h4>
-                    <p>Framework <strong>FastAPI</strong> expondo endpoints para consumo rápido e fiável das previsões.
-                    </p>
+
+                <!-- Etapa 2: Features -->
+                <div
+                    style="flex:1; background:linear-gradient(160deg,#eff6ff,#dbeafe); border:1px solid #bfdbfe; padding:20px 14px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;">
+                    <i class="fa-solid fa-filter" style="font-size:32px; color:#2563eb;"></i>
+                    <span style="font-size:13px; font-weight:700; color:#1d4ed8;">2. Features</span>
+                    <span style="font-size:11px; color:#1e40af; line-height:1.5;">Limpeza, normalização<br>e engenharia
+                        de variáveis</span>
+                    <div style="display:flex; flex-direction:column; gap:4px; margin-top:auto;">
+                        <code
+                            style="font-size:9px; color:#3b82f6; background:#dbeafe; padding:3px 7px; border-radius:4px;">preprocessing.py</code>
+                        <code
+                            style="font-size:9px; color:#3b82f6; background:#dbeafe; padding:3px 7px; border-radius:4px;">feature_engineering.py</code>
+                    </div>
                 </div>
-                <div class="arch-box">
-                    <i class="fa-brands fa-docker"></i>
-                    <h4>Containerização & Monitoramento</h4>
-                    <p>Ambiente isolado via Docker. Painel <strong>Streamlit</strong> para rastreio de desvios.</p>
+
+                <!-- Seta -->
+                <div
+                    style="display:flex; align-items:center; padding:0 3px; background:#fff; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
+                    <i class="fa-solid fa-chevron-right" style="font-size:16px; color:#cbd5e1;"></i>
+                </div>
+
+                <!-- Etapa 3: Modelo -->
+                <div
+                    style="flex:1; background:linear-gradient(160deg,#fdf4ff,#fae8ff); border:1px solid #e9d5ff; padding:20px 14px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;">
+                    <i class="fa-solid fa-microchip" style="font-size:32px; color:#9333ea;"></i>
+                    <span style="font-size:13px; font-weight:700; color:#7e22ce;">3. Modelo</span>
+                    <span style="font-size:11px; color:#6b21a8; line-height:1.5;">Random Forest<br>treinado e
+                        avaliado<br>via cross-validation</span>
+                    <div style="display:flex; flex-direction:column; gap:4px; margin-top:auto;">
+                        <code
+                            style="font-size:9px; color:#9333ea; background:#fae8ff; padding:3px 7px; border-radius:4px;">training.py</code>
+                        <code
+                            style="font-size:9px; color:#9333ea; background:#fae8ff; padding:3px 7px; border-radius:4px;">model.joblib</code>
+                    </div>
+                </div>
+
+                <!-- Seta -->
+                <div
+                    style="display:flex; align-items:center; padding:0 3px; background:#fff; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
+                    <i class="fa-solid fa-chevron-right" style="font-size:16px; color:#cbd5e1;"></i>
+                </div>
+
+                <!-- Etapa 4: API -->
+                <div
+                    style="flex:1; background:linear-gradient(160deg,#fff7ed,#ffedd5); border:1px solid #fed7aa; padding:20px 14px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;">
+                    <i class="fa-solid fa-bolt" style="font-size:32px; color:#ea580c;"></i>
+                    <span style="font-size:13px; font-weight:700; color:#c2410c;">4. API</span>
+                    <span style="font-size:11px; color:#9a3412; line-height:1.5;">Previsão em tempo real<br>individual
+                        ou em lote</span>
+                    <div style="display:flex; flex-direction:column; gap:4px; margin-top:auto;">
+                        <code
+                            style="font-size:9px; color:#ea580c; background:#ffedd5; padding:3px 7px; border-radius:4px;">FastAPI</code>
+                        <code
+                            style="font-size:9px; color:#ea580c; background:#ffedd5; padding:3px 7px; border-radius:4px;">POST /predict</code>
+                    </div>
+                </div>
+
+                <!-- Seta -->
+                <div
+                    style="display:flex; align-items:center; padding:0 3px; background:#fff; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
+                    <i class="fa-solid fa-chevron-right" style="font-size:16px; color:#cbd5e1;"></i>
+                </div>
+
+                <!-- Etapa 5: Produção -->
+                <div
+                    style="flex:1; background:linear-gradient(160deg,#0f172a,#1e293b); border:1px solid #334155; border-radius:0 10px 10px 0; padding:20px 14px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;">
+                    <i class="fa-solid fa-cloud" style="font-size:32px; color:#38bdf8;"></i>
+                    <span style="font-size:13px; font-weight:700; color:#e2e8f0;">5. Produção</span>
+                    <span style="font-size:11px; color:#94a3b8; line-height:1.5;">Ambiente isolado<br>deploy
+                        automático<br>via GitHub</span>
+                    <div style="display:flex; flex-direction:column; gap:4px; margin-top:auto;">
+                        <code
+                            style="font-size:9px; color:#7dd3fc; background:#0f172a; padding:3px 7px; border-radius:4px; border:1px solid #334155;">Docker</code>
+                        <code
+                            style="font-size:9px; color:#7dd3fc; background:#0f172a; padding:3px 7px; border-radius:4px; border:1px solid #334155;">Render Cloud</code>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Camada de observabilidade -->
+            <div
+                style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px 20px; display:flex; align-items:center; gap:24px;">
+                <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+                    <i class="fa-solid fa-eye" style="color:#64748b; font-size:16px;"></i>
+                    <span
+                        style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em;">Observabilidade</span>
+                </div>
+                <div style="width:1px; height:28px; background:#e2e8f0;"></div>
+                <div style="display:flex; gap:28px;">
+                    <span style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-muted);">
+                        <i class="fa-solid fa-wave-square" style="color:#dc2626; font-size:14px;"></i>
+                        <span><strong style="color:var(--text-main);">Data Drift</strong> · <code
+                                style="font-size:10px; color:#b91c1c;">drift_detection.py</code></span>
+                    </span>
+                    <span style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-muted);">
+                        <i class="fa-solid fa-chart-line" style="color:#2563eb; font-size:14px;"></i>
+                        <span><strong style="color:var(--text-main);">Dashboard</strong> · <code
+                                style="font-size:10px; color:#b91c1c;">dashboard.py</code></span>
+                    </span>
+                    <span style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-muted);">
+                        <i class="fa-solid fa-robot" style="color:#16a34a; font-size:14px;"></i>
+                        <span><strong style="color:var(--text-main);">Uptime Robot</strong> · 24/7</span>
+                    </span>
                 </div>
             </div>
+
         </div>
         <div class="slide-footer">
             <span>FIAP Datathon - Passos Mágicos</span>
             <span>03</span>
         </div>
     </div>
+
+
+
 
     <!-- Slide 4: Desempenho do Modelo -->
     <div class="slide-container">
