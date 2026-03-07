@@ -735,32 +735,107 @@
     </div>
 
 
-    <!-- Slide 7: Monitorização e Drift -->
+    <!-- Slide 7: Monitoramento Contínuo -->
     <div class="slide-container">
-        <h2>6. Monitorização Contínua (Evitar Degradação)</h2>
-        <div class="content-body grid-2">
-            <div>
-                <p>A implantação é apenas o começo. O sistema inclui ferramentas ativas para garantir que as previsões
-                    permaneçam precisas ano após ano.</p>
-                <ul style="margin-top: 16px;">
-                    <li><strong>Painel Streamlit dedicado:</strong> Visualização da saúde do sistema e saúde dos dados
-                        em tempo real.</li>
-                    <li><strong>Métricas:</strong> Rastreio ativo de métricas de validação cruzada (Cross-Validation),
-                        validação e teste.</li>
-                    <li><strong>Deteção Automatizada:</strong> O script <span
-                            class="inline-code">drift_detection.py</span> avalia desvios na distribuição dos dados (Data
-                        Drift) comparativamente ao modelo base.</li>
-                </ul>
+        <h2>6. Monitoramento Contínuo</h2>
+        <div class="content-body" style="justify-content: flex-start; gap: 14px; padding-top: 4px;">
+
+            <p style="font-size:13px; color:var(--text-muted);">A implantação é apenas o começo. O sistema combina três
+                camadas de observabilidade para garantir previsões confiáveis.</p>
+
+            <!-- 3 Cards de monitoramento -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+
+                <!-- Data Drift -->
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                        <div
+                            style="width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#fee2e2,#fecaca); display:flex; align-items:center; justify-content:center;">
+                            <i class="fa-solid fa-wave-square" style="font-size:14px; color:#dc2626;"></i>
+                        </div>
+                        <span style="font-weight:700; font-size:13px; color:var(--text-main);">Data Drift</span>
+                    </div>
+                    <p style="font-size:11px; margin-bottom:8px;">O script <span class="inline-code"
+                            style="font-size:10px;">drift_detection.py</span> compara a distribuição dos dados novos com
+                        a base de treino.</p>
+                    <ul style="font-size:11px; margin-bottom:0; padding-left:14px;">
+                        <li style="margin-bottom:4px;">Teste estatístico por feature</li>
+                        <li style="margin-bottom:4px;">Relatório <span class="inline-code"
+                                style="font-size:10px;">drift_report.json</span></li>
+                        <li style="margin-bottom:0;">Alerta automático de degradação</li>
+                    </ul>
+                </div>
+
+                <!-- Dashboard Streamlit -->
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                        <div
+                            style="width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#eff6ff,#dbeafe); display:flex; align-items:center; justify-content:center;">
+                            <i class="fa-solid fa-chart-line" style="font-size:14px; color:#2563eb;"></i>
+                        </div>
+                        <span style="font-weight:700; font-size:13px; color:var(--text-main);">Dashboard
+                            Streamlit</span>
+                    </div>
+                    <p style="font-size:11px; margin-bottom:8px;">Painel visual para acompanhamento em tempo real da
+                        saúde do modelo.</p>
+                    <ul style="font-size:11px; margin-bottom:0; padding-left:14px;">
+                        <li style="margin-bottom:4px;">Métricas de validação e teste</li>
+                        <li style="margin-bottom:4px;">Feature importance ao vivo</li>
+                        <li style="margin-bottom:0;">Histórico de desempenho</li>
+                    </ul>
+                </div>
+
+                <!-- Uptime Robot -->
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                        <div
+                            style="width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#f0fdf4,#dcfce7); display:flex; align-items:center; justify-content:center;">
+                            <i class="fa-solid fa-robot" style="font-size:14px; color:#16a34a;"></i>
+                        </div>
+                        <span style="font-weight:700; font-size:13px; color:var(--text-main);">Uptime Robot</span>
+                    </div>
+                    <p style="font-size:11px; margin-bottom:8px;">Monitoramento externo 24/7 da disponibilidade da API
+                        em produção.</p>
+                    <ul style="font-size:11px; margin-bottom:0; padding-left:14px;">
+                        <li style="margin-bottom:4px;">Ping a cada 5 minutos</li>
+                        <li style="margin-bottom:4px;">Alertas via e-mail em caso de queda</li>
+                        <li style="margin-bottom:0;"><a href="https://stats.uptimerobot.com/bviadalixD"
+                                style="color:#16a34a; font-size:10px; text-decoration:none; font-weight:600;">📊
+                                Relatório público</a></li>
+                    </ul>
+                </div>
+
             </div>
+
+            <!-- Banner de status -->
             <div
-                style="background: #f1f5f9; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                <i class="fa-solid fa-chart-line"
-                    style="font-size: 48px; color: var(--secondary); margin-bottom: 16px;"></i>
-                <h3 style="font-size: 16px;">Saúde do Sistema: <span style="color: var(--success);">Excelente</span>
-                </h3>
-                <p style="font-size: 13px;">O acompanhamento da <em>Importância dos Recursos (Feature Importance)</em>
-                    assegura que as variáveis com maior peso continuam a fazer sentido pedagógico.</p>
+                style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius:10px; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; border:1px solid #334155;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <i class="fa-solid fa-shield-halved" style="font-size:18px; color:#4ade80;"></i>
+                    <span style="font-size:13px; font-weight:600; color:#e2e8f0;">Status do Sistema</span>
+                </div>
+                <div style="display:flex; gap:20px;">
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span
+                            style="display:inline-flex; align-items:center; gap:4px; background:#dcfce7; color:#16a34a; font-size:10px; font-weight:700; padding:3px 8px; border-radius:99px; border:1px solid #bbf7d0;">
+                            <i class="fa-solid fa-circle" style="font-size:5px;"></i> Modelo
+                        </span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span
+                            style="display:inline-flex; align-items:center; gap:4px; background:#dcfce7; color:#16a34a; font-size:10px; font-weight:700; padding:3px 8px; border-radius:99px; border:1px solid #bbf7d0;">
+                            <i class="fa-solid fa-circle" style="font-size:5px;"></i> Dados
+                        </span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span
+                            style="display:inline-flex; align-items:center; gap:4px; background:#dcfce7; color:#16a34a; font-size:10px; font-weight:700; padding:3px 8px; border-radius:99px; border:1px solid #bbf7d0;">
+                            <i class="fa-solid fa-circle" style="font-size:5px;"></i> Uptime
+                        </span>
+                    </div>
+                </div>
             </div>
+
         </div>
         <div class="slide-footer">
             <span>FIAP Datathon - Passos Mágicos</span>
