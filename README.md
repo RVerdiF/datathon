@@ -225,6 +225,14 @@ O dashboard inclui:
 - 🔍 Análise de drift
 - 📋 Exploração dos dados
 
+### Screenshots
+
+![Dashboard — Métricas do Modelo](imgs/Dash_pg_1.png)
+![Dashboard — Feature Importances](imgs/Dash_pg_2.png)
+![Dashboard — Análise de Drift](imgs/Dash_pg_3.png)
+![Dashboard — Exploração dos Dados](imgs/Dash_pg_4.png)
+![Dashboard — Exploração dos Dados 2](imgs/Dash_pg_4_2.png)
+
 ## 🛠️ Tecnologias
 
 - **ML:** scikit-learn, pandas, numpy
