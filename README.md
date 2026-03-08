@@ -2,6 +2,14 @@
 
 Projeto de Machine Learning desenvolvido para o **Datathon FIAP** em parceria com a **Associação Passos Mágicos**. O modelo identifica estudantes em risco de defasagem escolar, permitindo intervenções proativas pela equipe pedagógica.
 
+## 🔗 Links
+
+| | Link |
+|---|---|
+| **Código-fonte (GitHub)** | https://github.com/RVerdiF/datathon |
+| **API em produção (Render)** | https://datathon-hj9j.onrender.com/ |
+| **Monitoramento de uptime** | https://stats.uptimerobot.com/bviadalixD |
+
 ## 📋 Visão Geral
 
 | Item | Detalhes |
